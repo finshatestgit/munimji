@@ -5,9 +5,9 @@ import re
 app = Flask(__name__)
 
 # MongoDB Configuration
-MONGO_URI = "mongodb://localhost:27017/finsha"
+MONGO_URI = "mongodb://munimdb2:XMQ4d6T7pFzA07eVJqFQ4mumNQ76YOX6wKdcsfVn8zPimd63eCB0IYIM9G5KF7DgRn19kZo4eoGuACDbU8VM9Q==@munimdb2.mongo.cosmos.azure.com:10255/munimji3?ssl=true&retrywrites=false"
 client = MongoClient(MONGO_URI)
-db = client["munimji2"]
+db = client["munimji3"]
 
 INTENT_TO_MONGODB_COLUMN = {
     "financialndicator - Beta": ("Beta", "Beta value", None),
