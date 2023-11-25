@@ -5,6 +5,9 @@ import re
 app = Flask(__name__)
 
 # MongoDB Configuration
+# MONGO_URI = "mongodb://localhost:27017/finsha"
+# client = MongoClient(MONGO_URI)
+# db = client["munimji2"]
 MONGO_URI = "mongodb://munimdb2:XMQ4d6T7pFzA07eVJqFQ4mumNQ76YOX6wKdcsfVn8zPimd63eCB0IYIM9G5KF7DgRn19kZo4eoGuACDbU8VM9Q==@munimdb2.mongo.cosmos.azure.com:10255/munimji3?ssl=true&retrywrites=false"
 client = MongoClient(MONGO_URI)
 db = client["munimji3"]
@@ -98,6 +101,22 @@ def fetch_company_info(company):
         return f"Sorry, I couldn't find the information for {company}"
 
 
+# def manual_test():
+#     print("Manual test mode.")
+#     intent_name = input("Enter intent name: ")
+#     company_name = input("Enter company name: ")
+#
+#     if intent_name == "companyInfo":
+#         response = fetch_company_info(company_name)
+#     elif intent_name in INTENT_TO_MONGODB_COLUMN:
+#         column, description, unit = INTENT_TO_MONGODB_COLUMN[intent_name]
+#         response = fetch_data_for_company(company_name, column, description, unit)
+#     else:
+#         response = "Invalid intent or not implemented."
+#
+#     print("Response:", response)
+
+
 @app.route('/dialogflow-webhook', methods=['POST'])
 def dialogflow_webhook():
     data = request.get_json()
@@ -126,6 +145,9 @@ def dialogflow_webhook():
     result = fetch_data_for_company(company_name, column, description, unit)
     return jsonify({"fulfillmentText": result})
 
-
 if __name__ == "__main__":
+    # mode = input("Enter mode (test/server): ")
+    # if mode == "test":
+    #     manual_test()
+    # else:
     app.run(debug=True)
